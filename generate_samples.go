@@ -18,25 +18,13 @@ func AMGenerator(t float64, frequency float64) float64 {
 	return (AMModSignal * sineGenerator(t, frequency))
 }
 
-// TODO FIX THIS -- NEW
 // Create FM modulated sine wave samples
 func FMGenerator(t float64, frequency float64) float64 {
 	FMModulator := sineGenerator(t, FMModFreq)
-	//FMModSample := FMModulator * FMModDepth
-	FMModAngle := 2.0*math.Pi*t*frequency + (FMModulator * FMModDepth)
+	FMModSignal := FMModulator * FMModDepth
 
-	return math.Sin(FMModAngle)
+	return sineGenerator(t, frequency+FMModSignal)
 }
-
-// OLD
-
-//// Create FM modulated sine wave samples
-//func FMGenerator(t float64, frequency float64) float64 {
-//	FMModulator := math.Sin(2.0 * math.Pi * t * FMModFreq)
-//	FMModAngle := 2.0*math.Pi*t*frequency + (FMModulator * FMModDepth)
-//
-//	return math.Sin(FMModAngle)
-//}
 
 // Create AM and FM modulated sine wave samples
 func AMFMGenerator(t float64, frequency float64) float64 {
