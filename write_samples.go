@@ -6,19 +6,14 @@ import (
 )
 
 func writeSamples(file *os.File) {
-	sampleGenerator := sineGenerator
+	sampleGenerator := chooseGenerator()
 
-	if AMModDepth != 0.0 && FMModDepth != 0.0 {
-		sampleGenerator = AMFMGenerator
-	} else if AMModDepth != 0 {
-		sampleGenerator = AMGenerator
-	} else if FMModDepth != 0 {
-		sampleGenerator = FMGenerator
-	}
 	for i := 0; i < numSamples; i++ {
-		t := float64(i) / sampleRate
-		sample := sampleGenerator(t)
-		sampleInt := int16(sample * 32767)
-		binary.Write(file, binary.LittleEndian, sampleInt)
+		sample := generateSample(i, sampleGenerator)
+		writeSample(sample)
 	}
+}
+
+func writeSample(sample int16) {
+	binary.Write(file, binary.LittleEndian, sample)
 }
