@@ -6,13 +6,15 @@ func calculateAngle(t float64) float64 {
 	return 2.0 * math.Pi * t
 }
 
+// TODO pass frequency as a param - it'll be more reusable
 func sineGenerator(t float64) float64 {
 	return math.Sin(calculateAngle(t) * frequency)
 }
 
 // Create AM modulated sine wave samples
 func AMGenerator(t float64) float64 {
-	AMModulator := (1 + math.Sin(calculateAngle(t)*AMModFreq)) / 2
+	AMModAngle := calculateAngle(t) * AMModFreq
+	AMModulator := (1 + math.Sin(AMModAngle)) / 2
 	// Sweep AMMod upwards
 	//AMModFreq *= 1.00001
 
@@ -23,8 +25,9 @@ func AMGenerator(t float64) float64 {
 func FMGenerator(t float64) float64 {
 	angle := calculateAngle(t)
 	FMModulator := math.Sin(angle * FMModFreq)
+	FMModAngle := angle*frequency + (FMModulator * FMModDepth)
 
-	return math.Sin(angle*frequency + (FMModulator * FMModDepth))
+	return math.Sin(FMModAngle)
 }
 
 // Create AM and FM modulated sine wave samples
@@ -33,8 +36,9 @@ func AMFMGenerator(t float64) float64 {
 
 	AMModulator := (1 + math.Sin(angle*AMModFreq)) / 2
 	FMModulator := math.Sin(angle * FMModFreq)
+	FMModAngle := angle*frequency + (FMModulator * FMModDepth)
 
-	return (AMModulator * AMModDepth) * math.Sin(angle*frequency+(FMModulator*FMModDepth))
+	return (AMModulator * AMModDepth) * math.Sin(FMModAngle)
 }
 
 // Choose which sine wave sample generation function to use based on
