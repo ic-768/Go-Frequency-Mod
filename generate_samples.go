@@ -11,24 +11,25 @@ func sineGenerator(t float64) float64 {
 }
 
 func AMGenerator(t float64) float64 {
-	AMmodulator := (1 + math.Sin(calculateAngle(t)*AMModFreq)) / 2
+	AMModulator := (1 + math.Sin(calculateAngle(t)*AMModFreq)) / 2
 	// Sweep AMMod upwards
 	//AMModFreq *= 1.00001
-	return (AMmodulator * AMModDepth) * sineGenerator(t)
+
+	return (AMModulator * AMModDepth) * sineGenerator(t)
 }
 
 func FMGenerator(t float64) float64 {
 	angle := calculateAngle(t)
-	FMmodulator := math.Sin(angle * FMModFreq)
+	FMModulator := math.Sin(angle * FMModFreq)
 
-	return math.Sin(angle*frequency + (FMmodulator * FMModDepth))
+	return math.Sin(angle*frequency + (FMModulator * FMModDepth))
 }
 
 func AMFMGenerator(t float64) float64 {
 	angle := calculateAngle(t)
 
-	AMmodulator := (1 + math.Sin(angle*AMModFreq)) / 2
-	FMmodulator := math.Sin(angle * FMModFreq)
+	AMModulator := (1 + math.Sin(angle*AMModFreq)) / 2
+	FMModulator := math.Sin(angle * FMModFreq)
 
-	return (AMmodulator * AMModDepth) * math.Sin(angle*frequency+(FMmodulator*FMModDepth))
+	return (AMModulator * AMModDepth) * math.Sin(angle*frequency+(FMModulator*FMModDepth))
 }

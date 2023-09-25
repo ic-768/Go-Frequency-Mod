@@ -10,7 +10,7 @@ var (
 	frequency  float64 = 440.0
 	FMModFreq  float64 = 2.0
 	AMModFreq  float64 = 1.0
-	FMModDepth float64 = 10.0
+	FMModDepth float64 = 0.0
 	AMModDepth float64 = 0.8
 	numSamples int     = int(sampleRate * duration)
 )
