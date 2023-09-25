@@ -8,9 +8,9 @@ var (
 	sampleRate float64 = 44100.0
 	duration   float64 = 80.0
 	frequency  float64 = 440.0
-	FMModFreq  float64 = 1.0
-	AMModFreq  float64 = 4.0
-	FMModDepth float64 = 0.2
+	FMModFreq  float64 = 5.0
+	AMModFreq  float64 = 1.0
+	FMModDepth float64 = 0.0
 	AMModDepth float64 = 0.0
 	numSamples int     = int(sampleRate * duration)
 )
@@ -21,12 +21,7 @@ func main() {
 
 	// Write WAV file header
 	writeWavHeader(file, numSamples, sampleRate)
-
-	if AMModDepth != 0.0 {
-		generateAmplitudeModulatedSamples(file)
-	} else {
-		generateSamples(file)
-	}
+	writeSamples(file)
 
 	file.Close()
 }
