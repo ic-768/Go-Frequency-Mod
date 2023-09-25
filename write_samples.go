@@ -6,7 +6,7 @@ import (
 )
 
 func writeSamples(file *os.File) {
-	sampleGenerator := SineGenerator
+	sampleGenerator := sineGenerator
 
 	if AMModDepth != 0.0 && FMModDepth != 0.0 {
 		sampleGenerator = AMFMGenerator
