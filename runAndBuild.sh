@@ -1,3 +1,3 @@
 #!/bin/sh
 
-go run freq_modulation.go && vlc sine_wave.wav
+go run *.go && vlc sine_wave.wav
