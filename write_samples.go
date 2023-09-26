@@ -52,10 +52,3 @@ func writeSamples() {
 		writeSample(samples[i])
 	}
 }
-
-func writeSamplesConcurrently(sampleChannel <-chan int16) {
-	for i := 0; i < numSamples; i++ {
-		sample := <-sampleChannel
-		writeSample(sample)
-	}
-}

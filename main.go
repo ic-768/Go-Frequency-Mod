@@ -6,7 +6,7 @@ import (
 
 var (
 	file, _       = os.Create("sine_wave.wav")
-	duration      = 80.0
+	duration      = 200.0
 	sampleRate    = 44100.0
 	numSamples    = int(sampleRate * duration)
 	sampleChannel = make(chan struct {
@@ -19,7 +19,7 @@ var (
 	AMModFreq    = 0.7
 	FMModDepth   = 0.0
 	AMModDepth   = 0.0
-	numHarmonics = 30
+	numHarmonics = 0
 )
 
 func main() {
