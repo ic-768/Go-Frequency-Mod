@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func writeWavHeader(file *os.File, numSamples int, sampleRate float64) {
+func writeWavHeader(file *os.File) {
 	// Constants
 	numChannels := 1
 	bitsPerSample := 16
