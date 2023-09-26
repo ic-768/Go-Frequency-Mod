@@ -10,16 +10,27 @@ func sineGenerator(t float64, frequency float64) float64 {
 func AMGenerator(t float64, frequency float64) float64 {
 	AMModulator := sineGenerator(t, AMModFreq)
 	AMModSignal := ((1 + AMModulator) / 2) * AMModDepth
+	sample := (sineGenerator(t, frequency))
 
-	return (AMModSignal * sineGenerator(t, frequency))
+	for i := 0; i < numHarmonics; i += 2 {
+		sample += (sineGenerator(t, frequency*float64(i+1*2)))
+	}
+
+	sample *= AMModSignal
+	if numHarmonics > 0 {
+		sample /= (float64(numHarmonics + 1))
+	}
+
+	return sample
 }
 
 // Create FM modulated sine wave samples
 func FMGenerator(t float64, frequency float64) float64 {
 	FMModulator := sineGenerator(t, FMModFreq)
 	FMModSignal := FMModulator * FMModDepth
+	sample := sineGenerator(t, frequency+FMModSignal)
 
-	return sineGenerator(t, frequency+FMModSignal)
+	return sample
 }
 
 // Create AM and FM modulated sine wave samples
@@ -28,8 +39,9 @@ func AMFMGenerator(t float64, frequency float64) float64 {
 	AMModSignal := ((1 + AMModulator) / 2) * AMModDepth
 	FMModulator := sineGenerator(t, FMModFreq)
 	FMModSignal := FMModulator * FMModDepth
+	sample := (AMModSignal) * sineGenerator(t, frequency+FMModSignal)
 
-	return (AMModSignal) * sineGenerator(t, frequency+FMModSignal)
+	return sample
 }
 
 // Choose which sine wave sample generation function to use based on

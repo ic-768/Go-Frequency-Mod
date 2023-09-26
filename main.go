@@ -5,15 +5,17 @@ import (
 )
 
 var (
-	sampleRate = 44100.0
-	duration   = 80.0
-	frequency  = 440.0
-	FMModFreq  = 1.0
-	AMModFreq  = 0.2
-	FMModDepth = 40.0
-	AMModDepth = 1.0
-	numSamples = int(sampleRate * duration)
 	file, _    = os.Create("sine_wave.wav")
+	duration   = 8.0
+	sampleRate = 44100.0
+	numSamples = int(sampleRate * duration)
+
+	frequency    = 440.0
+	FMModFreq    = 1.0
+	AMModFreq    = 0.2
+	FMModDepth   = 0.0
+	AMModDepth   = 1.0
+	numHarmonics = 1
 )
 
 func main() {
