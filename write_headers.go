@@ -2,10 +2,9 @@ package main
 
 import (
 	"encoding/binary"
-	"os"
 )
 
-func writeWavHeader(file *os.File) {
+func writeWavHeader() {
 	// Constants
 	numChannels := 1
 	bitsPerSample := 16

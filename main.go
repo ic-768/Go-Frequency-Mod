@@ -20,8 +20,8 @@ var (
 
 func main() {
 	// Write WAV file header
-	writeWavHeader(file)
-	writeSamples(file)
+	writeWavHeader()
+	writeSamples()
 
 	file.Close()
 }

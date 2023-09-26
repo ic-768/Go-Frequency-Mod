@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/binary"
-	"os"
 )
 
 func writeSample(sample int16) {
@@ -18,7 +17,7 @@ func generateSample(sampleNum int, generate func(float64, float64, int) float64)
 	return sampleInt
 }
 
-func writeSamples(file *os.File) {
+func writeSamples() {
 	sampleGenerator := chooseGenerator()
 
 	for i := 0; i < numSamples; i++ {
