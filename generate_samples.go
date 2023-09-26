@@ -16,10 +16,11 @@ func AMGenerator(t float64, frequency float64) float64 {
 		sample += (sineGenerator(t, frequency*float64(i+1*2)))
 	}
 
-	sample *= AMModSignal
 	if numHarmonics > 0 {
 		sample /= (float64(numHarmonics + 1))
 	}
+
+	sample *= AMModSignal
 
 	return sample
 }
