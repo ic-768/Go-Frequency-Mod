@@ -9,12 +9,12 @@ func writeSample(sample int16) {
 	binary.Write(file, binary.LittleEndian, sample)
 }
 
-func generateSample(sampleNum int, generate func(float64, float64, int) float64, sampleChannel chan<- SampleBuffer) {
+func generateSample(sampleNum int, generate func(float64, float64, int) float64) int16 {
 	t := float64(sampleNum) / sampleRate
 	sample := generate(t, frequency, numHarmonics)
 	sampleInt := int16(sample * 32767)
 
-	sampleChannel <- SampleBuffer{sample: sampleInt, index: sampleNum}
+	return sampleInt
 }
 
 func writeSamples() {
@@ -30,9 +30,7 @@ func writeSamples() {
 		wg.Add(1)
 		go func(i int) {
 			defer wg.Done()
-			generateSample(i, sampleGenerator, sampleChannel)
-			sampleData := <-sampleChannel
-			samples[sampleData.index] = sampleData.sample
+			samples[i] = generateSample(i, sampleGenerator)
 		}(i)
 	}
 

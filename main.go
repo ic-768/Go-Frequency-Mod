@@ -4,18 +4,11 @@ import (
 	"os"
 )
 
-// Because samples are calculated concurrently (potentially writing to file out of order), we store the sample index too
-type SampleBuffer struct {
-	sample int16
-	index  int
-}
-
 var (
-	file, _       = os.Create("sine_wave.wav")
-	duration      = 200.0
-	sampleRate    = 44100.0
-	numSamples    = int(sampleRate * duration)
-	sampleChannel = make(chan SampleBuffer, numSamples)
+	file, _    = os.Create("sine_wave.wav")
+	duration   = 200.0
+	sampleRate = 44100.0
+	numSamples = int(sampleRate * duration)
 
 	frequency    = 440.0
 	FMModFreq    = 1.0
